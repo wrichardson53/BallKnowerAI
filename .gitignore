@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# QB Ranker: downloaded NFL data (re-downloaded automatically) and the personal pick log
+data/
+pick_log.csv

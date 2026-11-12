@@ -3,7 +3,7 @@
             Who is the true best starting quarterback in the NFL?
 ===============================================================================
 
-QB Ranker grades every NFL starting quarterback on 16 stats from his own play,
+QB Ranker grades every NFL starting quarterback on 17 stats from his own play,
 then adjusts for the situation around him: the receivers he throws to, his run
 game, his offensive line, and the defenses he faced. Every grade is built from
 real, public NFL data that the program downloads itself, so the rankings update

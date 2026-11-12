@@ -1,24 +1,29 @@
 """
-QB Ranker - who is the true best quarterback in the NFL?
+QB Ranker - who is the true best starting quarterback in the NFL?
 
-Only STARTING quarterbacks are ranked, and only the games they started count.
-Each QB is graded on ~15 production metrics (Passing, Rushing, Efficiency, Ball
-Security, Winning) and then adjusted for his supporting cast:
+Only STARTING quarterbacks are ranked, and only the games they started count. Each QB is graded on
+17 stats from his own play (efficiency, passing, ball security, winning, rushing, pocket timing),
+then adjusted for the situation around him:
 
-  * Weapons  - how good his WR/TE/RB pass catchers are, measured with Next Gen
-               Stats that mostly reflect the receiver, not the QB: average
-               separation from defenders and YAC over expected.
-  * Run game - how effective the team's non-QB rushing attack is: rushing EPA per
-               carry, yards per carry, and RB rush yards over expected.
+  * Weapons          - his WR/TE/RB pass catchers: track record, this season's form, separation and
+                       YAC over expected (Next Gen Stats), honors and draft pedigree.
+  * Run game         - non-QB rushing EPA per carry, yards per carry, RB rush yards over expected.
+  * Pass protection  - pressure, sack, hit and hurry rates (adjusted for time to throw and blitzes)
+                       and the time his line gives him.
+  * Defenses faced   - each opponent's pass defense rated going into that game, weaker if it was
+                       missing key players.
 
-A QB who produces with a weak cast gains points; one with an elite cast loses some.
-Every weight lives in weights.json.
+Weak help earns credit, strong help costs points, a tough schedule earns credit. Every stat is
+compared with QBs who have 4+ starts, small samples are pulled toward average, and the result is
+shown as a Madden-style OVR (99.0 needs a score of 70+). Every weight lives in weights.json.
 
 Usage:
     python qb_rank.py                        # current season
     python qb_rank.py --season 2025 --top 10
-    python qb_rank.py --explain "Josh Allen"
+    python qb_rank.py --explain "Josh Allen" # one QB's full breakdown
     python qb_rank.py --teams                # supporting-cast grades for all 32 teams
+    python qb_rank.py --weekly               # the best QB of every week
+    python qb_rank.py --week 9               # everyone's ranking for one week
     python qb_rank.py --csv rankings.csv
 """
 

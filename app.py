@@ -1,15 +1,19 @@
 """
-QB Ranker GUI - a desktop window for browsing the rankings.
+QB Ranker desktop app.
 
-    py app.py
+    python app.py            (or double-click the built QB Ranker.exe)
 
-* Rankings tab: every starter. Click a column header to sort, click a QB to see
-  his metric-by-metric breakdown on the right.
-* Supporting Cast tab: weapons / run game grades for all 32 teams.
-* Change season, minimum starts or small-sample shrinkage in the top bar and
-  hit "Update". "Re-download" forces fresh data from nflverse.
+Tabs:
+* Rankings        - every starting QB with OVR, category grades and context. Click a column header to
+                    sort; click a QB for his stat-by-stat breakdown and plain-English notes.
+* Supporting Cast - every team's weapons, run game and pass protection grades. Click a team to see
+                    its pass catchers, each with his own grade.
+* Weekly          - the best QB of every week; click a week for everyone's ranking that week.
+* Predictions     - pick a week: each game's pick and win %, Vegas's pick and line, predicted score,
+                    expected interceptions, weather and key factors (needs model.json).
 
-Built on the public API in qb_rank.py (rank, breakdown, load_data, load_weights).
+Change season, minimum starts or the small-sample adjustment in the top bar and click Update.
+Re-download fetches the newest data from nflverse. Built on qb_rank.py and predict.py.
 """
 
 from __future__ import annotations
