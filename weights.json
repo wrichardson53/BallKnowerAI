@@ -1,0 +1,174 @@
+{
+  "_comment": "Weights are relative (any positive numbers). 'metrics' measure the QB's own production in games he STARTED. 'context' measures the help around him; a QB with a WEAKER supporting cast gets credit, a stronger one gets docked. 'weapon_parts' sets how the Weapons grade itself is built. 'context' also includes defenses faced: a tougher schedule earns credit. Set any weight to 0 to ignore it.",
+  "metrics": {
+    "pass_yds_pg": {
+      "weight": 10,
+      "higher_is_better": true,
+      "category": "Passing",
+      "label": "Pass Yds/G"
+    },
+    "pass_td_pg": {
+      "weight": 10,
+      "higher_is_better": true,
+      "category": "Passing",
+      "label": "Pass TD/G"
+    },
+    "att_pg": {
+      "weight": 2,
+      "higher_is_better": true,
+      "category": "Passing",
+      "label": "Att/G"
+    },
+    "cmp_pct": {
+      "weight": 4,
+      "higher_is_better": true,
+      "category": "Passing",
+      "label": "Cmp %"
+    },
+    "rush_yds_pg": {
+      "weight": 6,
+      "higher_is_better": true,
+      "category": "Rushing",
+      "label": "Rush Yds/G"
+    },
+    "rush_td_pg": {
+      "weight": 4,
+      "higher_is_better": true,
+      "category": "Rushing",
+      "label": "Rush TD/G"
+    },
+    "epa_per_play": {
+      "weight": 14,
+      "higher_is_better": true,
+      "category": "Efficiency",
+      "label": "EPA/Play"
+    },
+    "anya": {
+      "weight": 10,
+      "higher_is_better": true,
+      "category": "Efficiency",
+      "label": "ANY/A"
+    },
+    "passer_rating": {
+      "weight": 8,
+      "higher_is_better": true,
+      "category": "Efficiency",
+      "label": "Rating"
+    },
+    "cpoe": {
+      "weight": 5,
+      "higher_is_better": true,
+      "category": "Efficiency",
+      "label": "CPOE"
+    },
+    "first_down_rate": {
+      "weight": 3,
+      "higher_is_better": true,
+      "category": "Efficiency",
+      "label": "1st Down %"
+    },
+    "int_rate": {
+      "weight": 5,
+      "higher_is_better": false,
+      "category": "Ball Security",
+      "label": "INT %"
+    },
+    "int_worthy_rate": {
+      "weight": 6,
+      "higher_is_better": false,
+      "category": "Ball Security",
+      "label": "INT-worthy %"
+    },
+    "fumbles_lost_pg": {
+      "weight": 3,
+      "higher_is_better": false,
+      "category": "Ball Security",
+      "label": "Fum Lost/G"
+    },
+    "sack_rate": {
+      "weight": 4,
+      "higher_is_better": false,
+      "category": "Ball Security",
+      "label": "Sack %"
+    },
+    "win_pct": {
+      "weight": 12,
+      "higher_is_better": true,
+      "category": "Winning",
+      "label": "Win % (adj)"
+    },
+    "pocket_margin": {
+      "weight": 5,
+      "higher_is_better": true,
+      "category": "Pocket",
+      "label": "Time margin (s)"
+    }
+  },
+  "context": {
+    "weapons": {
+      "weight": 10,
+      "label": "Weapons",
+      "_parts": "see weapon_parts"
+    },
+    "run_game": {
+      "weight": 6,
+      "label": "Run Game",
+      "_parts": "non-QB rushing EPA/carry, yards/carry, RB rush yards over expected"
+    },
+    "pass_pro": {
+      "weight": 8,
+      "label": "Pass protection",
+      "_parts": "O-line: pressures, sacks, hits, hurries per dropback (adjusted for time to throw and blitzes) + time to throw; see pass_pro_parts"
+    },
+    "opp_defense": {
+      "weight": 8,
+      "label": "Defenses faced",
+      "credit_when": "higher",
+      "_parts": "pass defenses in his starts, each rated on its games BEFORE that week (see 'defense')"
+    }
+  },
+  "weapon_parts": {
+    "track_record": 25,
+    "track_efficiency": 10,
+    "star_power": 10,
+    "depth": 5,
+    "accolades": 5,
+    "pedigree": 5,
+    "form_adj": 10,
+    "sep_adj": 15,
+    "yac_oe": 15
+  },
+  "without_qb": {
+    "_comment": "How his pass catchers played in games he missed, judged only on what receivers control (getting open, YAC, production after removing the backup's accuracy). Share of his weapons grade = max_share * games_missed / (games_missed + prior_games). Set max_share to 0 to turn off.",
+    "max_share": 0.5,
+    "prior_games": 3,
+    "parts": {
+      "getting_open": 40,
+      "after_catch": 20,
+      "production_adj": 40
+    }
+  },
+  "defense": {
+    "_comment": "How pass defenses are rated going into each game: what opposing QBs did against them in earlier weeks. Last season's rating counts as 'prior_games' games so week 1 isn't blank.",
+    "parts": {
+      "epa_per_dropback": 50,
+      "anya": 30,
+      "sack_rate": 20
+    },
+    "prior_games": 4
+  },
+  "pass_pro_parts": {
+    "pressure_rate": 40,
+    "sack_rate": 20,
+    "hit_rate": 15,
+    "hurry_rate": 10,
+    "time_given": 15
+  },
+  "missing_players": {
+    "_comment": "Who missed each game comes from snap counts. Key weapon = at least key_weapon_min_share % of team targets; his targets go to a backup graded replacement_grade (weekly rankings). Key defenders = each defense's top key_defenders players; losing all of them makes the defense defense_impact std devs weaker (weekly and season rankings).",
+    "key_weapon_min_share": 10,
+    "replacement_grade": 42,
+    "key_defenders": 4,
+    "defense_impact": 1.0
+  }
+}
